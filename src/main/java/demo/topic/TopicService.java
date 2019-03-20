@@ -3,6 +3,7 @@ package demo.topic;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,30 +16,35 @@ import java.util.List;
 @Service
 public class TopicService
 {
-    private List<Topic> loadAllTopics()
-    {
-        List<Topic> topics = new ArrayList<>();
-        topics.add( new Topic( 1, "JAVA", "java Description" ) );
-        topics.add( new Topic( 2, "C++", "c++ Description" ) );
-        topics.add( new Topic( 3, "Spring", "spring Description" ) );
-        topics.add( new Topic( 4, "JAVASCRIPT", "javascript Description" ) );
-        return topics;
-    }
+    public List<Topic> topics = new ArrayList<>( Arrays.asList(
+            new Topic( 1, "JAVA", "java Description" ),
+            new Topic( 2, "C++", "c++ Description" ),
+            new Topic( 3, "Spring", "spring Description" ),
+            new Topic( 4, "JAVASCRIPT", "javascript Description" )
+    ));
 
     public List<Topic> getAllTopics()
     {
-        return loadAllTopics();
+        return topics;
     }
 
     public Topic getTopic( int id )
     {
-        if( loadAllTopics().stream().anyMatch( t -> t.getId() == id ) )
+        if( topics.stream().anyMatch( t -> t.getId() == id ) )
         {
-            return loadAllTopics().stream().filter( t -> t.getId() == id ).findFirst().get();
+            return topics.stream().filter( t -> t.getId() == id ).findFirst().get();
         }
         else
         {
             return null;
+        }
+    }
+
+    public void addTopic(Topic topic)
+    {
+        if( !topics.stream().anyMatch( t -> t.getId() == topic.getId() ) )
+        {
+            topics.add( topic );
         }
     }
 
