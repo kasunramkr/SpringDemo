@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class TopicService
 {
-    public List<Topic> loadAllTopics()
+    private List<Topic> loadAllTopics()
     {
         List<Topic> topics = new ArrayList<>();
         topics.add( new Topic( 1, "JAVA", "java Description" ) );
@@ -23,5 +23,10 @@ public class TopicService
         topics.add( new Topic( 3, "Spring", "spring Description" ) );
         topics.add( new Topic( 4, "JAVASCRIPT", "javascript Description" ) );
         return topics;
+    }
+
+    public List<Topic> getAllTopics()
+    {
+        return loadAllTopics();
     }
 }
