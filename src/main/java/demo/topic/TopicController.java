@@ -17,7 +17,7 @@ import java.util.List;
 public class TopicController
 {
     @Autowired
-    private Topicservice topicservice;
+    private TopicService topicservice;
 
     @RequestMapping("/topics")
     public List<Topic> getAllTopics()
