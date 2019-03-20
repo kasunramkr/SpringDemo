@@ -30,28 +30,16 @@ public class TopicService
         return loadAllTopics();
     }
 
-    public Topic getTopic( String id )
+    public Topic getTopic( int id )
     {
-        int idValue;
-        Topic topic = null;
-        try
+        if( loadAllTopics().stream().anyMatch( t -> t.getId() == id ) )
         {
-            idValue = Integer.parseInt( id );
-            if( loadAllTopics().stream().anyMatch( t -> t.getId() == idValue ) )
-            {
-                topic = loadAllTopics().stream().filter( t -> t.getId() == idValue ).findFirst().get();
-                return topic;
-            }
-            else
-            {
-                return topic;
-            }
+            return loadAllTopics().stream().filter( t -> t.getId() == id ).findFirst().get();
         }
-        catch( NumberFormatException e )
+        else
         {
-            e.printStackTrace();
+            return null;
         }
-        return topic;
     }
 
 }
