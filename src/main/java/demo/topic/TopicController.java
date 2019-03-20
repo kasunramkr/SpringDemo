@@ -1,9 +1,9 @@
 package demo.topic;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,20 +16,12 @@ import java.util.List;
 @RestController
 public class TopicController
 {
+    @Autowired
+    private Topicservice topicservice;
+
     @RequestMapping("/topics")
     public List<Topic> getAllTopics()
     {
-        List<Topic> topics = loadAllTopics();
-        return topics;
-    }
-
-    private List<Topic> loadAllTopics()
-    {
-        List<Topic> topics = new ArrayList<>();
-        topics.add( new Topic( 1, "JAVA", "java Description" ) );
-        topics.add( new Topic( 2, "C++", "c++ Description" ) );
-        topics.add( new Topic( 3, "Spring", "spring Description" ) );
-        topics.add( new Topic( 4, "JAVASCRIPT", "javascript Description" ) );
-        return topics;
+        return topicservice.loadAllTopics();
     }
 }
