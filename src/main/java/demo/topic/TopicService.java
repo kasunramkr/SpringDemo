@@ -29,4 +29,29 @@ public class TopicService
     {
         return loadAllTopics();
     }
+
+    public Topic getTopic( String id )
+    {
+        int idValue;
+        Topic topic = null;
+        try
+        {
+            idValue = Integer.parseInt( id );
+            if( loadAllTopics().stream().anyMatch( t -> t.getId() == idValue ) )
+            {
+                topic = loadAllTopics().stream().filter( t -> t.getId() == idValue ).findFirst().get();
+                return topic;
+            }
+            else
+            {
+                return topic;
+            }
+        }
+        catch( NumberFormatException e )
+        {
+            e.printStackTrace();
+        }
+        return topic;
+    }
+
 }
