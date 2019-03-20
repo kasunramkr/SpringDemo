@@ -10,13 +10,13 @@ public class Topic
 {
     private int id;
     private String name;
-    private String disscription;
+    private String description;
 
     public Topic( int id, String name, String description )
     {
         this.id = id;
         this.name = name;
-        this.disscription = description;
+        this.description = description;
     }
 
     public int getId()
@@ -39,13 +39,13 @@ public class Topic
         this.name = name;
     }
 
-    public String getDisscription()
+    public String getDescription()
     {
-        return disscription;
+        return description;
     }
 
-    public void setDisscription( String disscription )
+    public void setDescription( String description )
     {
-        this.disscription = disscription;
+        this.description = description;
     }
 }
