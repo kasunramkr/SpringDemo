@@ -58,4 +58,13 @@ public class TopicService
         }
     }
 
+    public void deleteTopic( int id )
+    {
+        if( topics.stream().anyMatch( t -> t.getId() == id ) )
+        {
+            Topic topic1 = topics.stream().filter( t -> t.getId() == id ).findFirst().get();
+            topics.remove( topic1 );
+        }
+    }
+
 }
