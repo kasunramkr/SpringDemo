@@ -40,11 +40,21 @@ public class TopicService
         }
     }
 
-    public void addTopic(Topic topic)
+    public void addTopic( Topic topic )
     {
         if( !topics.stream().anyMatch( t -> t.getId() == topic.getId() ) )
         {
             topics.add( topic );
+        }
+    }
+
+    public void updateTopic( Topic topic )
+    {
+        if( topics.stream().anyMatch( t -> t.getId() == topic.getId() ) )
+        {
+            Topic topic1 = topics.stream().filter( t -> t.getId() == topic.getId() ).findFirst().get();
+            topic1.setName( topic.getName() );
+            topic1.setDescription( topic.getDescription() );
         }
     }
 
