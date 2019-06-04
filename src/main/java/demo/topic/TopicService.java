@@ -1,5 +1,6 @@
 package demo.topic;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ import java.util.List;
 @Service
 public class TopicService
 {
+    @Autowired
+    private TopicRepository topicRepository;
+
     public List<Topic> topics = new ArrayList<>( Arrays.asList(
             new Topic( 1, "JAVA", "java Description" ),
             new Topic( 2, "C++", "c++ Description" ),
@@ -25,14 +29,16 @@ public class TopicService
 
     public List<Topic> getAllTopics()
     {
+        ArrayList<Topic> topics = new ArrayList<>(  );
+        topicRepository.findAll().forEach( topic -> topics.add( topic ) );
         return topics;
     }
 
-    public Topic getTopic( int id )
+    public Topic getTopic( Integer id )
     {
-        if( topics.stream().anyMatch( t -> t.getId() == id ) )
+        if( topicRepository.existsById( id ) )
         {
-            return topics.stream().filter( t -> t.getId() == id ).findFirst().get();
+            return topicRepository.findById( id ).get();
         }
         else
         {
@@ -42,29 +48,27 @@ public class TopicService
 
     public void addTopic( Topic topic )
     {
-        if( !topics.stream().anyMatch( t -> t.getId() == topic.getId() ) )
-        {
-            topics.add( topic );
-        }
+        topicRepository.save( topic );
     }
 
     public void updateTopic( Topic topic )
     {
-        if( topics.stream().anyMatch( t -> t.getId() == topic.getId() ) )
+        if( topicRepository.existsById( topic.getId() ) )
         {
-            Topic topic1 = topics.stream().filter( t -> t.getId() == topic.getId() ).findFirst().get();
-            topic1.setName( topic.getName() );
-            topic1.setDescription( topic.getDescription() );
+            Topic topicTemp = topicRepository.findById( topic.getId() ).get();
+            topicTemp.setName( topic.getName() );
+            topicTemp.setDescription( topic.getDescription() );
         }
     }
 
-    public void deleteTopic( int id )
+    public void deleteTopic( Integer id )
     {
-        if( topics.stream().anyMatch( t -> t.getId() == id ) )
-        {
-            Topic topic1 = topics.stream().filter( t -> t.getId() == id ).findFirst().get();
-            topics.remove( topic1 );
-        }
+        topicRepository.deleteById( id );
+    }
+
+    public void deleteAllTopics( )
+    {
+        topicRepository.deleteAll();
     }
 
 }

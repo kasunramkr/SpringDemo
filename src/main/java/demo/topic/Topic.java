@@ -1,30 +1,39 @@
 package demo.topic;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by   : Milinda
  * Email        : milinda@codegen.net
  * Date         : 3/20/2019
  * Time         : 4:19 PM
  */
+@Entity
 public class Topic
 {
-    private int id;
+    @Id
+    private Integer id;
     private String name;
     private String description;
 
-    public Topic( int id, String name, String description )
+    public Topic()
+    {
+
+    }
+    public Topic( Integer id, String name, String description )
     {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    public int getId()
+    public Integer getId()
     {
         return id;
     }
 
-    public void setId( int id )
+    public void setId( Integer id )
     {
         this.id = id;
     }

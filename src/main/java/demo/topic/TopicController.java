@@ -51,4 +51,10 @@ public class TopicController
     {
         topicservice.deleteTopic( id );
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteAllTopics")
+    public void deleteAllTopic()
+    {
+        topicservice.deleteAllTopics();
+    }
 }
